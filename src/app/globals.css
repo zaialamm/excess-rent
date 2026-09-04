@@ -1,0 +1,59 @@
+@import "tailwindcss";
+
+/*
+ * One palette, defined once. The site commits to a dark, warm-neutral ground
+ * rather than following the viewer's theme: the figures are money and they
+ * need one predictable place to sit.
+ */
+@theme {
+  --color-ground: #141210;
+  --color-raised: #1a1714;
+  --color-rule: #2b2621;
+  --color-rule-soft: #241f1b;
+  --color-dot: #3f382f;
+  --color-ink: #f2ede4;
+  --color-ink-2: #c9c0b2;
+  --color-muted: #a89f92;
+  --color-muted-2: #8b8175;
+  --color-brand: #5fcf95;
+  --color-brand-ink: #10231a;
+  --color-brand-bg: #1b2a22;
+  --color-warn: #e0a955;
+  --color-warn-bg: #2a2318;
+  --font-display: var(--font-bricolage), system-ui, sans-serif;
+  --font-sans: var(--font-public-sans), system-ui, sans-serif;
+}
+
+:root {
+  color-scheme: dark;
+}
+
+html,
+body {
+  background: var(--color-ground);
+  color: var(--color-ink);
+}
+
+body {
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Figures are compared down columns constantly; never let them shift. */
+.tnum {
+  font-variant-numeric: tabular-nums;
+}
+
+.label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: var(--color-muted-2);
+}
+
+.leader {
+  flex-grow: 1;
+  border-bottom: 1px dotted var(--color-dot);
+  margin: 0 0.625rem;
+  transform: translateY(-0.25rem);
+}

@@ -1,0 +1,29 @@
+{
+  "name": "simd-0437",
+  "version": "0.1.0",
+  "private": true,
+  "description": "See and reclaim the rent surplus SIMD-0437 leaves in your Solana accounts.",
+  "license": "MIT",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "test": "node --test test/*.test.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@solana/kit": "^8.2.0",
+    "next": "^15.5.4",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "server-only": "^0.0.1"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.1.13",
+    "@types/node": "^22.10.0",
+    "@types/react": "^19.1.0",
+    "@types/react-dom": "^19.1.0",
+    "tailwindcss": "^4.1.13",
+    "typescript": "^5.7.0"
+  }
+}
