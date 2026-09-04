@@ -68,9 +68,8 @@ else is active and carries the slot it activated at.
 src/lib/rent.ts     rent and phase maths, pure, no I/O
 src/lib/gates.ts    feature gate status
 src/lib/scan.ts     address classification and account discovery
-src/lib/claim.ts    building the withdraw transactions
-src/lib/wallet.ts   Wallet Standard, no adapter layer
-src/app/api/        scan, gates, and a narrow RPC proxy with a method allowlist
+src/lib/claim.ts    what releases a surplus, and who is allowed to sign
+src/app/api/        scan and gates
 ```
 
 ## Reference
@@ -79,5 +78,4 @@ src/app/api/        scan, gates, and a narrow RPC proxy with a method allowlist
 - [Reduced rent](https://solana.com/upgrades/reduced-rent)
 - [Feature gate tracker](https://github.com/anza-xyz/agave/wiki/Feature-Gate-Tracker-Schedule)
 
-Made by [zaialamm](https://github.com/zaialamm). MIT licensed. No backend state, no analytics, no
-wallet connection until you claim.
+MIT licensed.
