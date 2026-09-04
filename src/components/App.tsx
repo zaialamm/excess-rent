@@ -66,7 +66,7 @@ export function App({ clusters }: { clusters: ClusterState[] }) {
 
   return (
     <main className="min-h-screen pb-16">
-      <header className="flex items-center justify-between px-14 py-6">
+      <header className="flex items-center justify-between px-5 py-5 sm:px-14 sm:py-6">
         <span className="font-display text-xl font-extrabold tracking-tight">{SITE_NAME}</span>
         <nav className="flex items-center gap-6 text-sm">
           <a href={SIMD_URL} target="_blank" rel="noreferrer" className="text-ink-2 hover:text-brand">
@@ -75,8 +75,8 @@ export function App({ clusters }: { clusters: ClusterState[] }) {
         </nav>
       </header>
 
-      <div className="flex flex-col items-center px-6 pt-7">
-        <div className="bg-brand-bg text-brand flex items-center gap-2.5 rounded-full px-4 py-1.5 text-xs font-semibold">
+      <div className="flex flex-col items-center px-4 pt-6 sm:px-6 sm:pt-7">
+        <div className="bg-brand-bg text-brand flex items-center gap-2.5 rounded-full px-4 py-1.5 text-center text-xs font-semibold">
           <span className="bg-brand h-1.5 w-1.5 rounded-full" />
           {activeCluster?.rate
             ? `The floor on ${cluster} is ${activeCluster.rate.toLocaleString("en-US")} lamports per byte`
@@ -84,19 +84,19 @@ export function App({ clusters }: { clusters: ClusterState[] }) {
         </div>
 
         <form onSubmit={onSubmit} className="mt-6 w-full max-w-[760px]">
-          <div className="bg-raised border-dot flex items-center gap-2.5 rounded-full border py-1.5 pr-1.5 pl-6">
+          <div className="bg-raised border-dot flex items-center gap-2 rounded-full border py-1.5 pr-1.5 pl-4 sm:gap-2.5 sm:pl-6">
             <input
               value={address}
               onChange={(e) => setAddress(e.target.value)}
               placeholder="Paste a wallet, token account, mint or program address"
               spellCheck={false}
               aria-label="Solana address"
-              className="text-ink-2 placeholder:text-muted-2 min-w-0 flex-1 basis-0 bg-transparent py-3 font-mono text-sm outline-none"
+              className="text-ink-2 placeholder:text-muted-2 min-w-0 flex-1 basis-0 bg-transparent py-3 font-mono text-xs outline-none sm:text-sm"
             />
             <button
               type="submit"
               disabled={scanning}
-              className="bg-ink text-ground cursor-pointer rounded-full px-7 py-3 text-sm font-semibold disabled:opacity-60"
+              className="bg-ink text-ground shrink-0 cursor-pointer rounded-full px-5 py-3 text-sm font-semibold disabled:opacity-60 sm:px-7"
             >
               {scanning ? "Scanning" : "Check"}
             </button>

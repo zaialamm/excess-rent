@@ -42,17 +42,17 @@ export function Rollout({
 
   return (
     <section id="rollout" className="w-full">
-      <h2 className="font-display text-2xl font-bold tracking-tight">The rollout</h2>
+      <h2 className="font-display text-xl font-bold tracking-tight sm:text-2xl">The rollout</h2>
       <p className="text-muted mt-2 text-sm leading-relaxed">
         Five feature gates, each switched on separately once core developers judge the state growth safe.
         Nothing after the live step has a date. Read from the gate accounts on every cluster.
       </p>
 
-      <div className="border-rule mt-5 flex border-t border-b">
+      <div className="border-rule mt-5 flex flex-col border-t border-b sm:flex-row">
         {clusters.map((cluster, i) => (
           <div
             key={cluster.cluster}
-            className={`min-w-0 flex-1 basis-0 py-4 ${i > 0 ? "border-rule border-l pl-5" : ""}`}
+            className={`min-w-0 flex-1 basis-0 py-3 sm:py-4 ${i > 0 ? "border-rule border-t sm:border-t-0 sm:border-l sm:pl-5" : ""}`}
           >
             <div className="label uppercase">{cluster.cluster}</div>
             <div className="tnum mt-1.5 text-xl">
@@ -68,7 +68,8 @@ export function Rollout({
         ))}
       </div>
 
-      <div className="bg-raised border-rule mt-5 rounded-xl border p-5">
+      <div className="bg-raised border-rule mt-5 overflow-x-auto rounded-xl border p-5">
+        <div className="min-w-[620px]">
         <div className="border-rule label flex border-b pb-3 pl-3.5 uppercase">
           <div className="w-64">Stage</div>
           <div className="w-40">Rate change</div>
@@ -109,7 +110,9 @@ export function Rollout({
             </button>
           );
         })}
+        </div>
       </div>
+      <p className="text-muted-2 mt-3 text-xs sm:hidden">Scroll the table sideways to see every cluster.</p>
     </section>
   );
 }

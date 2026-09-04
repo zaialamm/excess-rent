@@ -85,12 +85,12 @@ export function Results({
       <p className="text-muted-2 mt-8 text-sm tracking-wide">
         {live ? "This address can reclaim right now" : "This address will be able to reclaim"}
       </p>
-      <p className="font-display tnum mt-2 text-7xl font-bold tracking-tighter">
-        <Lamports className="text-muted-2 text-5xl" />
+      <p className="font-display tnum mt-2 text-5xl font-bold tracking-tighter sm:text-7xl">
+        <Lamports className="text-muted-2 text-3xl sm:text-5xl" />
         {toSol(total, 4)}
       </p>
       {usd(total, scan.solPrice) && (
-        <p className="font-display tnum text-brand mt-2.5 text-3xl font-medium">
+        <p className="font-display tnum text-brand mt-2.5 text-2xl font-medium sm:text-3xl">
           {usd(total, scan.solPrice)}
         </p>
       )}
@@ -102,13 +102,16 @@ export function Results({
             : `${scan.totals.claimableCount} account${scan.totals.claimableCount === 1 ? "" : "s"} can hand it back without closing anything.`}
       </p>
 
-      <div className="border-rule mt-8 flex w-full border-t border-b">
+      <div className="border-rule mt-8 flex w-full flex-col border-t border-b sm:flex-row">
         {[
           { label: "Accounts were funded at", value: BASE_LAMPORTS_PER_BYTE },
           { label: "The floor is now", value: scan.rate },
           { label: "And will reach", value: 696 },
         ].map((cell, i) => (
-          <div key={cell.label} className={`min-w-0 flex-1 basis-0 py-4 ${i > 0 ? "border-rule border-l pl-5" : ""}`}>
+          <div
+            key={cell.label}
+            className={`min-w-0 flex-1 basis-0 py-3 sm:py-4 ${i > 0 ? "border-rule border-t sm:border-t-0 sm:border-l sm:pl-5" : ""}`}
+          >
             <div className="label uppercase">{cell.label}</div>
             <div className="tnum mt-1.5 text-xl">
               {commas(cell.value)} <span className="text-muted-2 text-sm">per byte</span>
@@ -129,11 +132,11 @@ export function Results({
               : `Once step ${phase.stage} activates at ${commas(phase.rate)}`}
           </span>
         </div>
-        <div className="relative flex h-12 items-center justify-between">
-          <div className="bg-rule absolute top-[10px] right-12 left-12 h-[3px]" />
+        <div className="relative flex h-12 items-center justify-between [--stop:3.75rem] sm:[--stop:6rem]">
+          <div className="bg-rule absolute top-[10px] right-[calc(var(--stop)/2)] left-[calc(var(--stop)/2)] h-[3px]" />
           <div
-            className="bg-brand absolute top-[10px] left-12 h-[3px] transition-[width] duration-200"
-            style={{ width: `calc(${(stage - 1) / (PHASES.length - 1)} * (100% - 6rem))` }}
+            className="bg-brand absolute top-[10px] left-[calc(var(--stop)/2)] h-[3px] transition-[width] duration-200"
+            style={{ width: `calc(${(stage - 1) / (PHASES.length - 1)} * (100% - var(--stop)))` }}
           />
           {scan.phases.map((p) => {
             const on = p.stage === stage;
@@ -144,7 +147,7 @@ export function Results({
                 type="button"
                 onClick={() => onSelectStage(p.stage)}
                 aria-pressed={on}
-                className="relative z-10 flex w-24 cursor-pointer flex-col items-center gap-2.5"
+                className="relative z-10 flex w-(--stop) cursor-pointer flex-col items-center gap-2.5"
               >
                 <span className="flex h-5 items-center justify-center">
                   <span
@@ -153,7 +156,7 @@ export function Results({
                     } ${on || past ? "border-brand bg-brand" : "border-dot bg-raised"}`}
                   />
                 </span>
-                <span className={`text-xs ${on ? "text-ink font-semibold" : "text-muted-2"}`}>
+                <span className={`text-[11px] whitespace-nowrap sm:text-xs ${on ? "text-ink font-semibold" : "text-muted-2"}`}>
                   {p.reached && p.stage === 1 ? "Now" : `Phase ${p.stage}`}
                 </span>
               </button>
@@ -162,7 +165,7 @@ export function Results({
         </div>
       </div>
 
-      <div className="bg-raised border-rule mt-10 w-full rounded-xl border p-7">
+      <div className="bg-raised border-rule mt-10 w-full rounded-xl border p-5 sm:p-7">
         <div className="label mb-4">WHERE IT SITS</div>
         {lines.map((line) => (
           <div key={line.name} className="mb-3 flex items-baseline">
@@ -184,16 +187,19 @@ export function Results({
             <div className="label mb-3">BIGGEST ACCOUNTS</div>
             {biggest.map((account) => (
               <div key={account.address} className="mb-2.5 flex items-baseline">
-                <span className="text-ink-2 w-60 font-mono text-[13px]">
+                <span className="text-ink-2 w-32 font-mono text-[13px] sm:w-60">
                   {shortAddress(account.address)}
                 </span>
-                <span className="text-muted-2 flex-grow text-[13px]">{KIND_LABEL[account.kind]}</span>
+                <span className="text-muted-2 hidden flex-grow text-[13px] sm:block">
+                  {KIND_LABEL[account.kind]}
+                </span>
+                <span className="flex-grow sm:hidden" />
                 <span className="tnum text-ink-2 text-[13px]">{sol(lineFor([account]))}</span>
               </div>
             ))}
             {rest > 0 && (
               <div className="mt-3 flex items-baseline">
-                <span className="text-muted-2 w-60 text-[13px]">+ {rest} more accounts</span>
+                <span className="text-muted-2 w-32 text-[13px] sm:w-60">+ {rest} more accounts</span>
                 <span className="flex-grow" />
                 <span className="tnum text-muted-2 text-[13px]">
                   {sol(lineFor(scan.accounts.slice(3)))}
@@ -204,7 +210,7 @@ export function Results({
         )}
       </div>
 
-      <div className="bg-raised border-rule mt-8 w-full rounded-xl border p-7">
+      <div className="bg-raised border-rule mt-8 w-full rounded-xl border p-5 sm:p-7">
         <h3 className="text-base font-semibold">How to take it</h3>
         <dl className="mt-4 space-y-3.5 text-sm leading-relaxed">
           {claimable > 0n && (
@@ -237,7 +243,7 @@ export function Results({
         </a>
       </div>
 
-      <div className="mt-8 flex w-full gap-6">
+      <div className="mt-8 flex w-full flex-col gap-4 sm:flex-row sm:gap-6">
         {closable > 0n && (
           <div className="bg-raised border-rule min-w-0 flex-1 basis-0 rounded-xl border p-6">
             <h3 className="text-base font-semibold">{scan.totals.emptyCount} of them are empty</h3>
