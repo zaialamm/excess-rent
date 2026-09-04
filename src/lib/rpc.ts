@@ -103,9 +103,12 @@ async function postOnce(cluster: Cluster, body: unknown, timeoutMs: number): Pro
   } catch (err) {
     if (err instanceof RpcError) throw err;
     if (err instanceof Error && err.name === "AbortError") {
-      throw new RpcError(`RPC timed out after ${timeoutMs}ms`);
+      throw new RpcError(`The ${cluster} RPC timed out after ${timeoutMs}ms.`);
     }
-    throw new RpcError(err instanceof Error ? err.message : "RPC request failed");
+    // Never surface the underlying message: a DNS or TLS failure can carry the
+    // endpoint's hostname, and these errors are returned to the browser.
+    console.error(`[rpc] ${cluster} request failed`, err);
+    throw new RpcError(`The ${cluster} RPC could not be reached.`);
   } finally {
     clearTimeout(timer);
   }

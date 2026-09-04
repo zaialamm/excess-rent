@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useMemo, useState } from "react";
 import type { ClusterState } from "@/app/api/gates/route";
-import { CLUSTERS, type Cluster } from "@/lib/clusters";
+import { SCAN_CLUSTERS, type Cluster } from "@/lib/clusters";
 import type { ScanResult } from "@/lib/scan";
 import { AUTHOR, REPO_URL, SIMD_URL, SITE_NAME, X_URL } from "@/lib/site";
 import { GitHubMark, XMark } from "./Icons";
@@ -104,7 +104,7 @@ export function App({ clusters }: { clusters: ClusterState[] }) {
         </form>
 
         <div className="mt-3 flex gap-2">
-          {CLUSTERS.map((name) => (
+          {SCAN_CLUSTERS.map((name) => (
             <button
               key={name}
               type="button"
